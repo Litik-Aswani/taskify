@@ -1,0 +1,335 @@
+.todosSingle {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+
+  padding: 20px;
+  margin-top: 15px;
+
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 25px;
+
+  color: #17202a;
+
+  transition:
+    background-color 0.4s ease,
+    scale 0.2s ease,
+    box-shadow 0.5s ease;
+  box-shadow:
+    inset 0 0 0 0 rgba(34, 164, 71, 0),
+    0 0 0 rgba(0, 0, 0, 0);
+  animation: cardEnter 0.4s ease;
+}
+
+.todosSingle:hover {
+  box-shadow:
+    inset 0 0 0 0 rgba(34, 164, 71, 0),
+    0 0 5px black;
+  scale: 1.03;
+}
+
+.todosSingle-movingRight {
+  pointer-events: none;
+  animation: moveRight 0.4s ease forwards;
+}
+
+.todosSingle-movingLeft {
+  pointer-events: none;
+  animation: moveLeft 0.4s ease forwards;
+}
+
+.todosSingle-done,
+.todosSingle-done:hover {
+  background-color: rgba(134, 239, 172, 0.9);
+
+  box-shadow:
+    inset 0 0 0 4px #22a447,
+    0 0 12px rgba(34, 164, 71, 0.6);
+}
+
+.todosSingle-text {
+  flex: 1;
+  min-width: 0;
+  padding: 5px;
+
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  outline: none;
+
+  font-family: inherit;
+  font-size: 20px;
+}
+
+.todoIcons {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+
+  width: 32px;
+  height: 32px;
+
+  line-height: 0;
+  cursor: pointer;
+}
+
+.icon svg {
+  width: 25px;
+  height: 25px;
+}
+
+.doneIcon {
+  color: green;
+
+  transition:
+    color 0.4s ease,
+    transform 0.4s ease;
+}
+
+.deleteIcon {
+  color: red;
+
+  transition:
+    color 0.4s ease,
+    transform 0.4s ease;
+}
+
+.editIcon {
+  color: #36454f;
+
+  transition:
+    color 0.4s ease,
+    transform 0.4s ease;
+}
+
+.todosSingle-done .doneIcon {
+  color: #17202a;
+  transform: scale(1.2);
+}
+
+.drag {
+  box-shadow: 0 0 20px black;
+}
+
+.todosSingle-deleteWarning,
+.todosSingle-deleteWarning:hover {
+  background-color: rgba(254, 202, 202, 0.95);
+
+  box-shadow:
+    inset 0 0 0 4px #dc2626,
+    0 0 12px rgba(220, 38, 38, 0.6);
+}
+
+.todosSingle-deleting,
+.todosSingle-deleting:hover {
+  pointer-events: none;
+  transform: scale(1.03);
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.1) 35%,
+    rgba(0, 0, 0, 0.45) 48%,
+    rgba(0, 0, 0, 0.8) 58%,
+    black 72%
+  );
+
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.1) 35%,
+    rgba(0, 0, 0, 0.45) 48%,
+    rgba(0, 0, 0, 0.8) 58%,
+    black 72%
+  );
+
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  animation: scatteredBlur 0.9s ease-in forwards;
+}
+
+.deleteConfirmOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: grid;
+  place-items: center;
+
+  background-color: rgba(0, 0, 0, 0.6);
+  animation: overlayAppear 0.25s ease forwards;
+}
+
+.deleteConfirmPopup {
+  width: min(90%, 350px);
+  padding: 24px;
+
+  color: #17202a;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  animation: popupAppear 0.25s ease forwards;
+}
+
+.deleteConfirmActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.deleteConfirmActions button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.deleteConfirmActions button:hover {
+  filter: brightness(0.92);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.deleteConfirmActions button:active {
+  transform: scale(0.9);
+}
+
+.confirmDeleteButton {
+  color: white;
+  background-color: #dc2626;
+}
+
+.deleteConfirmOverlay-closing {
+  animation: overlayDisappear 0.25s ease forwards;
+}
+
+.deleteConfirmOverlay-closing .deleteConfirmPopup {
+  animation: popupDisappear 0.2s ease forwards;
+}
+
+@keyframes scatteredBlur {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+
+  40% {
+    opacity: 1;
+    filter: blur(0.7px);
+  }
+
+  75% {
+    opacity: 0.9;
+    filter: blur(2px);
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(7px);
+
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+}
+
+@keyframes overlayAppear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes overlayDisappear {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes popupAppear {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes popupDisappear {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+}
+
+@media (max-width: 700px) {
+  .input {
+    width: 95%;
+  }
+
+  .container {
+    width: 95%;
+    flex-direction: column;
+  }
+
+  .todos {
+    width: 95%;
+    margin-bottom: 10px;
+  }
+}
+
+@keyframes moveRight {
+  to {
+    opacity: 0;
+    transform: translateX(50px) scale(0.95);
+    filter: blur(2px);
+  }
+}
+
+@keyframes moveLeft {
+  to {
+    opacity: 0;
+    transform: translateX(-50px) scale(0.95);
+    filter: blur(2px);
+  }
+}

@@ -1,0 +1,54 @@
+.todos {
+  display: flex;
+  flex-direction: column;
+  width: 47.5%;
+  padding: 15px;
+  color: white;
+  border-radius: 10px;
+}
+
+.todosHeading {
+  font-size: 30px;
+  text-align: center;
+  color: white;
+}
+
+.container {
+  width: 95%;
+  display: flex;
+  margin-top: 10px;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.completed {
+  background-color: rgb(235, 103, 80);
+}
+
+.active {
+  background-color: rgb(30, 128, 0);
+}
+
+.dragActive {
+  background-color: rgb(38, 255, 0);
+  border-radius: 15px;
+  transition: 0.3s ease;
+}
+
+.dragComplete {
+  background-color: rgb(255, 38, 0);
+  border-radius: 15px;
+  transition: 0.3s ease;
+}
+@media (max-width: 950px) {
+  .container {
+    width: 95%;
+    flex-direction: column;
+  }
+
+  .todos {
+    width: 95%;
+    margin-bottom: 10px;
+  }
+}
