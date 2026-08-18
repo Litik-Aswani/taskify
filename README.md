@@ -1,75 +1,93 @@
-# React + TypeScript + Vite
+Taskify
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Taskify is a responsive task-management app I built while learning React and TypeScript. The project helped me practise typed React components, state management, event handling, responsive CSS, and drag-and-drop interactions in a real application.
 
-Currently, two official plugins are available:
+Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Create, edit, and delete tasks
 
-## React Compiler
+Delete confirmation modal with animations
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Move tasks between Active and Completed with one click
 
-## Expanding the ESLint configuration
+Drag and drop tasks between lists
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Automatically update a task's completion status based on its list
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Reorder tasks within the same list
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Responsive layout for desktop and smaller screens
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Custom styling, transitions, background, and favicon
 
-```
+Built With
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+React
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+TypeScript
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Vite
 
-```
+@hello-pangea/dnd
+
+React Icons
+
+CSS
+
+What I Changed and Added
+
+The tutorial that inspired this project used an older React setup and the now-deprecated react-beautiful-dnd package. I adapted the project to a modern setup and continued developing it with my own changes, including:
+
+Migrating the project to Vite and React 19
+
+Replacing react-beautiful-dnd with the maintained @hello-pangea/dnd package
+
+Creating separate Active and Completed task lists
+
+Allowing tasks to move in both directions using either drag and drop or the check button
+
+Automatically changing isDone when a task changes lists
+
+Adding an animated delete confirmation interface
+
+Adding custom task transitions and visual status indicators
+
+Improving responsive behavior and rebuilding the visual design
+
+Adding a custom page background and browser-tab icon
+
+Getting Started
+
+Prerequisites
+
+Install Node.js and npm.
+
+Installation
+
+git clone https://github.com/hameesmomin/taskify.git
+cd taskify
+npm install
+npm run dev
+
+Open the local address shown by Vite, usually http://localhost:5173.
+
+Available Commands
+
+npm run dev # Start the development server
+npm run build # Create a production build
+npm run lint # Check the project with ESLint
+npm run preview # Preview the production build
+
+Learning Source and Credit
+
+This project was started by following freeCodeCamp's React & TypeScript – Course for Beginners, created by Roadside Coder.
+
+The course provided the original Taskify concept and taught the React and TypeScript foundations used in the project. I then updated the tooling, replaced deprecated dependencies, customized the interface, and added the behaviors described above.
+
+Current Limitation
+
+Tasks are currently stored in React state, so they reset when the page is refreshed. Persistent storage is a possible future improvement.
+
+Author
+
+Built by @Litik-Aswani as a project-based React and TypeScript learning exercise.
